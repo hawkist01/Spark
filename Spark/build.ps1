@@ -112,8 +112,14 @@ Run $zipalign @('-f','-p','4',$baseApk,$aligned)
 
 # ---- 7. sign ----
 Step "apksigner"
-Run $java @('-jar',$apksignerJar,'sign','--ks',$ks,'--ks-pass','pass:sparkpass',
-            '--key-pass','pass:sparkpass','--out',$finalApk,$aligned)
+# Keystore password is never hardcoded (repo is public): env var SPARK_KS_PASS,
+# or a line in the gitignored Spark\keystore\ks-pass.txt. Generate your own keystore.
+$ksPassFile = Join-Path (Split-Path -Parent $ks) 'ks-pass.txt'
+if ($env:SPARK_KS_PASS) { $ksPass = $env:SPARK_KS_PASS }
+elseif (Test-Path $ksPassFile) { $ksPass = (Get-Content $ksPassFile -Raw).Trim() }
+else { throw "No keystore password. Set SPARK_KS_PASS or create $ksPassFile (gitignored)." }
+Run $java @('-jar',$apksignerJar,'sign','--ks',$ks,'--ks-pass',"pass:$ksPass",
+            '--key-pass',"pass:$ksPass",'--out',$finalApk,$aligned)
 
 Write-Host "`nBUILD OK -> $finalApk" -ForegroundColor Green
 Get-Item $finalApk | Select-Object FullName, @{n='MB';e={[math]::Round($_.Length/1MB,1)}} | Format-List
