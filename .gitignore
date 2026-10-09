@@ -1,0 +1,20 @@
+# Local toolchain (JDK, Android SDK, adb) - downloaded by buildtools scripts
+# NOTE: only the root /buildtools - Spark/buildtools holds project scripts and IS committed
+/buildtools/
+
+# Signing keystore - keep local, never commit signing keys
+Spark/keystore/
+
+# Build intermediates
+Spark/build/
+*.idsig
+
+# Duplicate APK copy at repo root (canonical: Spark/dist/Spark.apk)
+/Spark.apk
+
+# Leftover scratch dir
+dotapp/
+
+# OS noise
+Thumbs.db
+.DS_Store

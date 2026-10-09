@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.Spark" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/spark_bg</item>
+        <item name="android:navigationBarColor">@color/spark_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@color/spark_bg</item>
+        <item name="android:fontFamily">@font/space_mono</item>
+    </style>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Spark</string>
+    <string name="guardian_desc">Watches how long you scroll social apps, and gently covers your screen when you\'ve been going too long so you can pick something healthier.</string>
+</resources>
